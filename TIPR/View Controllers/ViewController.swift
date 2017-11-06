@@ -19,6 +19,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         billField.text = ""
@@ -27,8 +28,68 @@ class ViewController: UIViewController {
         numberOfPeopleField.text = "1"
         totalPerPersonLabel.text = "$0.00"
         
+        // Load default tip percentage from SettingsViewController
+        // with associated key "default_tip_percentage"
+        
+        let defaults = UserDefaults.standard
+        let tipValue = defaults.integer(forKey: "default_tip_percentage")
+        tipControl.selectedSegmentIndex = tipValue
+        
+        // Load data from previous session if the time from last use
+        // is less than 10 mins, otherwise start fresh
+        
+        // If previous time is nil set previous to current time
+        // this means it is the users first time using the app, or
+        // all settings were refreshed
+        
+        if let previousTime: NSDate = defaults.object(forKey: "previousTime") as? NSDate {
+            let elapasedTime = NSDate().timeIntervalSince(previousTime as Date)
+            if (elapasedTime < 600)
+            {
+                // Load saved bill, tip, and number of people fields
+                
+                let savedBill = defaults.string(forKey: "savedBillField")
+                billField.text = savedBill
+                
+                let savedTipValue = defaults.integer(forKey: "savedTip")
+                tipControl.selectedSegmentIndex = savedTipValue
+                
+                let savedPeople = defaults.string(forKey: "savedNumberOfPeopleField")
+                numberOfPeopleField.text = savedPeople
+            }
+        }
+        
+        // Save current time
+        let currentTime: NSDate! = NSDate()
+        defaults.set(currentTime, forKey: "previousTime")
+        defaults.synchronize()
+        
+        // The bill amount is always the first responder. This way
+        // the user doesn't have to tap anywhere to use this app.
+        // Just launch the app and start typing.
+        
+        billField.becomeFirstResponder()
+        
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // print("view will appear")
+        
+        // This is a good place to retrieve the default tip percentage from NSUserDefaults
+        // and use it to update the tip amount
+        
+        // Load default tip percentage from SettingsViewController
+        // with associated key "default_tip_percentage"
+        
+        let defaults = UserDefaults.standard
+        let tipValue = defaults.integer(forKey: "default_tip_percentage")
+        tipControl.selectedSegmentIndex = tipValue
+        
+        // Create function to update totals after default tip has been changed
+        updateFields()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,6 +101,15 @@ class ViewController: UIViewController {
     
     @IBAction func calculateTip(_ sender: Any) {
         updateFields()
+        
+        // Save bill, tip, and number of people fields
+        let index = tipControl.selectedSegmentIndex
+        let defaults = UserDefaults.standard
+        defaults.set(billField.text, forKey: "savedBillField")
+        defaults.set(index, forKey: "savedTip")
+        defaults.set(numberOfPeopleField.text, forKey: "savedNumberOfPeopleField")
+        defaults.synchronize()
+        
     }
     
     @IBAction func clear(_ sender: Any) {
@@ -48,6 +118,14 @@ class ViewController: UIViewController {
         totalLabel.text = "$0.00"
         numberOfPeopleField.text = "1"
         totalPerPersonLabel.text = "$0.00"
+        
+        // Save bill, tip, and number of people fields
+        let index = tipControl.selectedSegmentIndex
+        let defaults = UserDefaults.standard
+        defaults.set(billField.text, forKey: "savedBillField")
+        defaults.set(index, forKey: "savedTip")
+        defaults.set(numberOfPeopleField.text, forKey: "savedNumberOfPeopleField")
+        defaults.synchronize()
     }
     
     func updateFields(){

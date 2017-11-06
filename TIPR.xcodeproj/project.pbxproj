@@ -14,6 +14,7 @@
 		1E7B7CCD1FB01EA10029C060 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7B7CCB1FB01EA10029C060 /* LaunchScreen.storyboard */; };
 		1E7B7CD81FB01EA10029C060 /* TIPRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B7CD71FB01EA10029C060 /* TIPRTests.swift */; };
 		1E7B7CE31FB01EA10029C060 /* TIPRUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B7CE21FB01EA10029C060 /* TIPRUITests.swift */; };
+		1ED4E9FA1FB0F26200A99CE3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4E9F91FB0F26200A99CE3 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		1E7B7CDE1FB01EA10029C060 /* TIPRUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TIPRUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7B7CE21FB01EA10029C060 /* TIPRUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIPRUITests.swift; sourceTree = "<group>"; };
 		1E7B7CE41FB01EA10029C060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1ED4E9F91FB0F26200A99CE3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,8 @@
 		1E7B7CC11FB01EA10029C060 /* TIPR */ = {
 			isa = PBXGroup;
 			children = (
+				1ED4E9FB1FB0F2D200A99CE3 /* View Controllers */,
 				1E7B7CC21FB01EA10029C060 /* AppDelegate.swift */,
-				1E7B7CC41FB01EA10029C060 /* ViewController.swift */,
 				1E7B7CC61FB01EA10029C060 /* Main.storyboard */,
 				1E7B7CC91FB01EA10029C060 /* Assets.xcassets */,
 				1E7B7CCB1FB01EA10029C060 /* LaunchScreen.storyboard */,
@@ -123,6 +125,15 @@
 				1E7B7CE41FB01EA10029C060 /* Info.plist */,
 			);
 			path = TIPRUITests;
+			sourceTree = "<group>";
+		};
+		1ED4E9FB1FB0F2D200A99CE3 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1E7B7CC41FB01EA10029C060 /* ViewController.swift */,
+				1ED4E9F91FB0F26200A99CE3 /* SettingsViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +272,7 @@
 			files = (
 				1E7B7CC51FB01EA10029C060 /* ViewController.swift in Sources */,
 				1E7B7CC31FB01EA10029C060 /* AppDelegate.swift in Sources */,
+				1ED4E9FA1FB0F26200A99CE3 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
